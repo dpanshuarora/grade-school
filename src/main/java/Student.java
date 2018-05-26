@@ -1,29 +1,21 @@
 public class Student {
-  String name;
-  Integer grade;
+  private String name;
+  private Integer grade;
 
   Student(String name, int grade) {
     this.name = name;
     this.grade = grade;
   }
 
-  String getName() {
+  public String getName() {
     return name;
   }
 
-  Integer getGrade() {
+  public Integer getGrade() {
     return grade;
   }
 
-  void setName(String name) {
-    name = name;
-  }
-
-  void setGrade(Integer grade) {
-    grade = grade;
-  }
-
   public String toString() {
-    return name + " " + grade;
+    return name;
   }
 }
