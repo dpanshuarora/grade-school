@@ -14,8 +14,4 @@ public class Student {
   public Integer getGrade() {
     return grade;
   }
-
-  public String toString() {
-    return name;
-  }
 }
