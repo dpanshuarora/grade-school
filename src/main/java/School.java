@@ -8,7 +8,7 @@ public class School {
   private ArrayList<Student> students = new ArrayList<>();
 
   public void add(String name, int grade) {
-  	Student student = new Student(name, grade);
+    Student student = new Student(name, grade);
     students.add(student);
   }
 
