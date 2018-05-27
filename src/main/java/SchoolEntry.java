@@ -4,7 +4,7 @@ import java.util.List;
 public class SchoolEntry {
   
   public static void main(String[] args) {
-  	School school = new School();
+    School school = new School();
     school.add("Bilal", 6);
     school.add("Akshay", 6);
     school.add("Neha", 3);
