@@ -1,43 +1,39 @@
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.Collections;
 import java.util.*;
-import java.util.stream.*;
 
 public class School {
-  private ArrayList<Student> students = new ArrayList<>();
+  private Map<Integer, List<String>> students;
 
-  public void add(String name, int grade) {
-    Student student = new Student(name, grade);
-    students.add(student);
+  School() {
+    students = new HashMap<>();
   }
 
-  public ArrayList<String> grade(int grade) {
-    ArrayList<String> studentsByGrade = students.stream()
-                .filter(student -> student.getGrade() == grade)
-                .map(student -> student.getName())
-                .collect(Collectors.toCollection(ArrayList::new));
-    return studentsByGrade;
+  public void add(String name, Integer grade) {
+    students.computeIfAbsent(grade, namesOfStudents -> new ArrayList<>()).add(name);
   }
-  
-  public HashMap<Integer, List<String>> studentsByGradeAlphabetical() {
-    
-    Set<Integer> uniqueGrades = getUniqueGrades();
 
-    HashMap<Integer, List<String>> studentsByGradeAlphabetical = new HashMap<Integer, List<String>>();
-    for(int grade : uniqueGrades) {
-      List<String> students = this.grade(grade);
-      Collections.sort(students);
-      studentsByGradeAlphabetical.put(grade, students);
+  public List<String> grade(Integer grade) {
+    List<String> studentsByGrade;
+    if(students.get(grade) == null) {
+      studentsByGrade = new ArrayList<>();
     }
-    return studentsByGradeAlphabetical;
+    else {
+      studentsByGrade = students.get(grade);
+    }
+    return Collections.unmodifiableList(studentsByGrade);
   }
 
-  private Set<Integer> getUniqueGrades() {
-    Set<Integer> uniqueGrades = students.stream()
-                .map(student -> student.getGrade())
-                .collect(Collectors.toCollection(HashSet::new));
-    return uniqueGrades;
+  public Map<Integer, List<String>> studentsByGradeAlphabetical() {
+    
+    Map<Integer, List<String>> studentsByGradeAlphabetical = new HashMap<>();
+    for(int grade : students.keySet()) {
+      List<String> student_list = students.get(grade);
+      Collections.sort(student_list);
+      studentsByGradeAlphabetical.put(grade, student_list);
+    }
+    return Collections.unmodifiableMap(studentsByGradeAlphabetical);
   }
 
   public int numberOfStudents() {
