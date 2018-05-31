@@ -26,14 +26,10 @@ public class School {
   }
 
   public Map<Integer, List<String>> studentsByGradeAlphabetical() {
-    
-    Map<Integer, List<String>> studentsByGradeAlphabetical = new HashMap<>();
     for(int grade : students.keySet()) {
-      List<String> student_list = students.get(grade);
-      Collections.sort(student_list);
-      studentsByGradeAlphabetical.put(grade, student_list);
+      Collections.sort(students.get(grade));
     }
-    return Collections.unmodifiableMap(studentsByGradeAlphabetical);
+    return Collections.unmodifiableMap(students);
   }
 
   public int numberOfStudents() {
